@@ -36,9 +36,6 @@
 
 ) 
 
- 
-
- 
 
 (define-map ListingData principal 
 
@@ -60,19 +57,12 @@
 
   ) 
 
- 
-
- 
-
- 
-
 (define-public (list-needer (needer principal) (neededAmount uint) (description (string-ascii 100)) (contact (string-ascii 100)) ) 
 
     (begin  
 
     ;; Todo: update new fields for listing data map 
 
- 
 
         (map-insert ListingData needer { 
 
@@ -92,42 +82,47 @@
 
  
 
-;;Todo:  viet function upvote,downvote 
+
 
 (define-public (vote-listing (needer principal) (vote bool) (comment (string-ascii 100)) ) 
-
  (let 
-
       ( 
-
           (listing (unwrap! (map-get? ListingData needer) LISTING_NOT_FOUND )) 
-
           ;; if vote true ++vote 
-
       ) 
-
     (asserts! (map-set ListingVotes {listing-needer: needer, voter: tx-sender} {is_upvote: vote, comment: comment}) YOU_ALREADY_VOTE_FOR_THIS_LISTING )  
-
     ;; todo update map listingData 
-
-    (ok needer) 
-
+    ;; if 
+    (if vote 
+        (ok (upvote needer)) 
+        (ok (upvote needer)) 
+    )    
   ) 
-
- 
-
 ) 
 
- 
+;;Todo:  viet function upvote,downvote 
+(define-private (upvote (needer principal)) 
+;; update cai listing data
+      (map-set ListingData needer 
+      (merge (unwrap-panic (map-get? ListingData needer)) 
+      { upVoteCount: (+ u1
+      (get upVoteCount (unwrap-panic (map-get? ListingData needer)))
+      
+      )} 
+      ))
+)
+
 
 (define-read-only (get-listing (needer principal)) 
-
   (begin  
-
     (map-get? ListingData needer) 
-
   ) 
+) 
 
+(define-read-only (get-listing-vote (needer principal) (voter principal)) 
+  (begin  
+    (map-get? ListingVotes {listing-needer: needer, voter: voter}) 
+  ) 
 ) 
 
  
