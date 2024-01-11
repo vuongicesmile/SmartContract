@@ -7,6 +7,14 @@ cache_dir = '.\.cache'
 requirements = []
 [contracts.donation]
 path = 'contracts/donation.clar'
+
+[contracts.sip-010ft]
+path = 'contracts/sip-010ft.clar'
+
+[contracts.dt]
+path = 'contracts/dt.clar'
+
+
 clarity_version = 2
 epoch = 2.4
 [repl.analysis]

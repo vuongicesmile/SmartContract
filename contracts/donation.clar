@@ -177,3 +177,7 @@
   ) 
 
 ) 
+
+;; TODO: Create custom token: DT (Donation Token)
+;; Create Donation NFT
+;; Donate by DT token and Donation NFT
