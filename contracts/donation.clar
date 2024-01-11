@@ -4,16 +4,10 @@
 
 (define-constant YOU_ALREADY_VOTE_FOR_THIS_LISTING (err u103)) 
 
- 
-
 (define-data-var total_listing uint u0) 
 
- 
 
 ;; Todo: them 1 map listingVotes 
-
- 
-
 ;; {listing-needer, voter } => {is_upvote} 
 
 ;;  listing-needer : tuc la key nguoi vote cho cai map 
@@ -29,10 +23,6 @@
 (define-map ListingVotes { listing-needer: principal, voter: principal } 
 
                          { is_upvote: bool, comment: (string-ascii 100)} 
-
- 
-
- 
 
 ) 
 
@@ -90,12 +80,12 @@
           (listing (unwrap! (map-get? ListingData needer) LISTING_NOT_FOUND )) 
           ;; if vote true ++vote 
       ) 
-    (asserts! (map-set ListingVotes {listing-needer: needer, voter: tx-sender} {is_upvote: vote, comment: comment}) YOU_ALREADY_VOTE_FOR_THIS_LISTING )  
+    (asserts! (map-insert ListingVotes {listing-needer: needer, voter: tx-sender} {is_upvote: vote, comment: comment}) YOU_ALREADY_VOTE_FOR_THIS_LISTING )  
     ;; todo update map listingData 
     ;; if 
     (if vote 
         (ok (upvote needer)) 
-        (ok (upvote needer)) 
+        (ok (downvote needer)) 
     )    
   ) 
 ) 
@@ -108,6 +98,16 @@
       { upVoteCount: (+ u1
       (get upVoteCount (unwrap-panic (map-get? ListingData needer)))
       
+      )} 
+      ))
+)
+
+(define-private (downvote (needer principal)) 
+;; update cai listing data
+      (map-set ListingData needer 
+      (merge (unwrap-panic (map-get? ListingData needer)) 
+      { downVoteCount: (+ u1
+      (get downVoteCount (unwrap-panic (map-get? ListingData needer)))
       )} 
       ))
 )
@@ -166,11 +166,6 @@
         listing { receivedAmount: (+ amount currentReceiveAmount) } 
 
       )) 
-
- 
-
- 
-
       ;; (map-set ListingData needer { 
 
       ;;     neededAmount: neededAmountValue, receivedAmount: (+ amount currentReceiveAmount), description: description, contact: contact  
