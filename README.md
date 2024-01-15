@@ -1,4 +1,4 @@
-Bitcoin : chậm và phí mắc , sẽ không dùng bitcoin là smart contract 
+[Bitcoin : chậm và phí mắc , sẽ không dùng bitcoin là smart contract 
 Dùng Ethereum: 
 Ngược lại với bitcoin, Ethereum họ định vị là siêu máy tính với smart contract 
 Stack blockchain: dựa vào bitcioint,  
@@ -1035,3 +1035,4 @@ sdsd
 ) 
 
  
+](https://explorer.hiro.so/sandbox/contract-call/ST000000000000000000002AMW42H.pox-3?chain=testnet)https://explorer.hiro.so/sandbox/contract-call/ST000000000000000000002AMW42H.pox-3?chain=testnet
