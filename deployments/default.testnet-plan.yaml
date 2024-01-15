@@ -1,0 +1,35 @@
+---
+id: 0
+name: Testnet deployment
+network: testnet
+stacks-node: "https://api.testnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoind.testnet.stacks.co:18332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: sip-010ft
+            expected-sender: ST16E0K2CHFRN50KXYT0SS06FJ5VH5SB27F7PP670
+            cost: 12400737
+            path: "contracts\\sip-010ft.clar"
+            anchor-block-only: true
+            clarity-version: 1
+        - contract-publish:
+            contract-name: donation
+            expected-sender: ST16E0K2CHFRN50KXYT0SS06FJ5VH5SB27F7PP670
+            cost: 12413057
+            path: "contracts\\donation.clar"
+            anchor-block-only: true
+            clarity-version: 1
+      epoch: "2.05"
+    - id: 1
+      transactions:
+        - contract-publish:
+            contract-name: dt
+            expected-sender: ST16E0K2CHFRN50KXYT0SS06FJ5VH5SB27F7PP670
+            cost: 12401507
+            path: "contracts\\dt.clar"
+            anchor-block-only: true
+            clarity-version: 2
+      epoch: "2.4"
