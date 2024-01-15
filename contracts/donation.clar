@@ -1,3 +1,9 @@
+;; smae implements tract
+(use-trait sip-010 .sip-010ft.sip010-ft-trait)
+
+
+
+
 (define-constant LISTING_NOT_FOUND (err u101)) 
 
 (define-constant CAN_NOT_DONATE_YOURSELF (err u102)) 
@@ -177,7 +183,16 @@
   ) 
 
 ) 
+;; TODO: Create custom token: DT (Donation Token)
+(define-public (donate-dt (sipcontract <sip-010>) (needer principal) (amount uint)) 
+  (contract-call? sipcontract transfer amount tx-sender needer none)
+)
 
 ;; TODO: Create custom token: DT (Donation Token)
 ;; Create Donation NFT
 ;; Donate by DT token and Donation NFT
+
+
+  (define-public (say-hello) 
+    (ok "hello world")
+  )
